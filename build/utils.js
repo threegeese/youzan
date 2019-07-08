@@ -6,6 +6,7 @@ const packageConfig = require('../package.json')
 
 
 // add -------------------
+
 // var path = require('path')
 var glob = require('glob')
 var HtmlWebpackPlugin = require('html-webpack-plugin')
@@ -50,6 +51,7 @@ exports.htmlPlugin = function() {
   })
   return arr
 }
+
 // add---------------
 
 exports.assetsPath = function (_path) {
