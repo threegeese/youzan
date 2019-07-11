@@ -4,6 +4,7 @@ import { InfiniteScroll } from 'mint-ui'
 
 import url from 'js/api.js'
 import Footer from 'components/Footer.vue'
+import Swiper from 'components/Swiper.vue'
 
 import 'css/common.css'
 import './index.css'
@@ -14,6 +15,7 @@ new Vue({
 
   data: {
     lists: null,
+    bannerLists: null,
     pageNum: 0,
     pageSize: 6,
     loading: false,
@@ -21,17 +23,21 @@ new Vue({
   },
 
   components: {
-    Foot: Footer
+    Foot: Footer,
+    Swiper
   },
 
   created () {
     this.getMoreHotGoods()
+    this.getBanner()
   },
 
   methods: {
+
     getMoreHotGoods () {
-      if (this.allLoaded) return 
+      if (this.allLoaded) return
       this.loading = true
+
       Axios.post(url.hotlists, {
         pageNum: this.pageNum,
         pageSize: this.pageSize
@@ -48,7 +54,14 @@ new Vue({
           this.lists = currentLists
         }
       })
+    },
+
+    getBanner () {
+      Axios.get(url.bannerlists).then(res => {
+        this.bannerLists = res.data.lists
+      })
     }
+
   }
 
 }).$mount('#app')

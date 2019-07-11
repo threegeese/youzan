@@ -1,7 +1,8 @@
 const host = 'https://easy-mock.com/mock/5d22e80d07e3c95eeba9707a/youzan'
 
 const url = {
-  hotlists: '/hotlists'
+  hotlists: '/hotlists',
+  bannerlists: '/bannerlists'
 }
 
 for (let key in url) {
