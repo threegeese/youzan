@@ -2,7 +2,10 @@ const host = 'https://easy-mock.com/mock/5d22e80d07e3c95eeba9707a/youzan'
 
 const url = {
   hotlists: '/hotlists',
-  bannerlists: '/bannerlists'
+  bannerlists: '/bannerlists',
+  toplists: '/category/toplists',
+  sublists: '/category/sublists',
+  rank: '/category/rank'
 }
 
 for (let key in url) {
