@@ -5,7 +5,8 @@ const url = {
   bannerlists: '/bannerlists',
   toplists: '/category/toplists',
   sublists: '/category/sublists',
-  rank: '/category/rank'
+  rank: '/category/rank',
+  searchlists: '/search/lists'
 }
 
 for (let key in url) {

@@ -141,6 +141,7 @@
                   :data-item-id="list.id" 
                   data-item-name="良品铺子"
                   v-for="list in subData.brandList"
+                  @click="toSearch(list)"
                 >
                   <img :src="list.img" :alt="list.name" class="category-img">
                   <span class="category-item-name">{{list.name}}</span>
@@ -152,6 +153,7 @@
                   data-item-id="10" 
                   data-item-name="水果"
                   v-for="list in subData.categoryList"
+                  @click="toSearch(list)"
                 >
                   <img :src="list.img" alt="list.name" class="category-img">
                   <span class="category-item-name">{{list.name}}</span>
