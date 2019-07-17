@@ -2,7 +2,8 @@ import Vue from 'vue'
 import Axios from 'axios'
 
 import url from 'js/api.js'
-import Footer from 'components/Footer.vue'
+// import Foot from 'components/Footer.vue'
+import mixin from 'js/mixin.js'
 
 import 'css/common.css'
 import './category.css'
@@ -46,14 +47,16 @@ new Vue({
     }
   },
 
-  filters: {
-    priceFilter (price) {
-      return price.toFixed(2)
-    }
-  },
+  mixins: [mixin]
 
-  components: {
-    Foot: Footer
-  }
+  // filters: {
+  //   priceFilter (price) {
+  //     return price.toFixed(2)
+  //   }
+  // },
+
+  // components: {
+  //   Foot
+  // }
 
 }).$mount('#category')
