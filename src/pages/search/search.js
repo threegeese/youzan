@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import Axios from 'axios'
 import qs from 'qs'
+import Velocity from 'velocity-animate'
 
 import url from 'js/api.js'
 import mixin from 'js/mixin.js'
@@ -25,15 +26,14 @@ new Vue({
       })
     },
     pageScroll () {
-      console.log(document.body.scrollTop)
-      if (document.body.scrollTop > 100) {
+      if (document.documentElement.scrollTop > 200) {
         this.showGoToTop = true
       } else {
         this.showGoToTop = false
       }
     },
     goToTop () {
-
+      Velocity(document.body, 'scroll', {duration: 500})
     }
   },
   mixins: [mixin]
