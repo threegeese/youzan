@@ -7,6 +7,7 @@
       </a>
     </div>
   </div>
+  <div class="swiper-pagination"></div>
 </div>
 </template>
 
@@ -26,6 +27,9 @@ export default {
     new Swiper('.swiper-container', {
       loop: true,
       autoplay: true,
+      pagination: {
+        el: '.swiper-pagination'
+      },
       speed: 400
     }).init()
   }

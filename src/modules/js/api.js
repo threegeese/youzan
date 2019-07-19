@@ -6,7 +6,10 @@ const url = {
   toplists: '/category/toplists',
   sublists: '/category/sublists',
   rank: '/category/rank',
-  searchlists: '/search/lists'
+  searchlists: '/search/lists',
+  goodsInfo: '/goods/details',
+  deal: '/goods/deal',
+  cartlists: '/cart/add'
 }
 
 for (let key in url) {
