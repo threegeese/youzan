@@ -68,7 +68,9 @@ new Vue({
     },
     getDeal () {
       Axios.post(url.deal, { id }).then(res => {
-        this.dealLists = res.data.data.lists
+        if (!this.dealLists) {
+          this.dealLists = res.data.data.lists
+        }
       })
     },
     chooseSku (type) {
@@ -80,7 +82,7 @@ new Vue({
       this.skuNumber += number
     },
     addToCart () {
-      Axios.post(url.cartlists, { id, number: this.skuNumber }).then(res => {
+      Axios.post(url.addcart, { id, number: this.skuNumber }).then(res => {
         if (res.data.status === 200) {
           this.showSku = false
           this.inCart = true
