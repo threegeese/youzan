@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import Axios from 'axios'
+import Volecity from 'velocity-animate'
 
 import url from 'js/api.js'
 import mixin from 'js/mixin.js'
@@ -18,9 +19,11 @@ new Vue({
     removeData: null,
     removeMsg: ''
   },
+
   created () {
     this.getCartList()
   },
+
   computed: {
     allSelected: {
       get () {
@@ -85,6 +88,7 @@ new Vue({
       }
     }
   },
+
   methods: {
     getCartList () {
       Axios.get(url.cartlists).then(res => {
@@ -215,7 +219,25 @@ new Vue({
         shop.isEditing = false
         shop.editMessage = '编辑'
       })
+    },
+
+    slideStart (event, goods) {
+      goods.startX = event.changedTouches[0].clientX
+    },
+
+    slideEnd (evnet, shopIndex, goods, goodsIndex) {
+      goods.endX = event.changedTouches[0].clientX
+      let slideX = '0'
+      if (goods.startX - goods.endX > 100) {
+        slideX = '-60px'
+      } else if (goods.endX - goods.startX > 100) {
+        slideX = '0px'
+      }
+      Volecity(this.$refs[`goods-${shopIndex}-${goodsIndex}`], {
+        left: slideX
+      })
     }
   },
+
   mixins: [mixin]
 }).$mount('.container')
