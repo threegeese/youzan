@@ -21,7 +21,7 @@
     }
   </style>
 </head>
-<body class=" body-fixed-bottom" style="">
+<body class=" body-fixed-bottom">
   <div class="container " style="min-height: 581px;" v-cloak>
     <div class="content clearfix js-page-content">
       <div id="cart-container">
@@ -30,7 +30,8 @@
             <div class="block block-order block-cart" >
               <div class="header">
                 <div class="select-group js-select-group" @click="selectShop(shop)">
-                  <span :class="['check', {checked: shop.checked}]"></span>
+                  <span :class="['check', {checked: shop.checked}]" v-show="!editingShop"></span>
+                  <span :class="['check', {checked: shop.removeChecked}]" v-show="editingShop"></span>
                 </div>
                 <a class="shop-title"><i class="custom-store-img">店铺：</i>{{shop.shopTitle}}</a>
                 <a href="javascript:;"
@@ -49,7 +50,7 @@
                   >
                     <div>
                       <div class="check-container" @click="selectGoods(shop, goods)">
-                        <span :class="['check', {checked: goods.checked}]"></span>
+                        <span :class="['check', {checked: editingShop ? goods.removeChecked : goods.checked}]"></span>
                       </div>
                       <div class="name-card clearfix">
                         <a :href="'goods.html?id=' + goods.id" class="thumb js-goods-link">
@@ -65,18 +66,18 @@
                           <!-- 编辑状态 -->
                           <div class="num"  style="display: none;" v-show="shop.isEditing">
                             <div class="quantity">
-                              <button type="button" class="minus disabled"></button>
+                              <button type="button" :class="['minus', {disabled: goods.number === 1}]"></button>
                               <input type="text" pattern="[0-9]*" class="txt" v-model="goods.number">
                               <button type="button" class="plus "></button>
-                              <div class="response-area response-area-minus"></div>
-                              <div class="response-area response-area-plus"></div>
+                              <div class="response-area response-area-minus" @click="reduce(goods)"></div>
+                              <div class="response-area response-area-plus" @click="add(goods)"></div>
                             </div>
                           </div>
                           <div class="price c-orange"> ¥<span>{{goods.price | priceFilter}}</span> </div>
                         </div>
                         <div class="error-box"></div>
                       </div>
-                      <div class="delete-btn"><span>删除</span></div>
+                      <div class="delete-btn" @click="remove(shop, shopIndex, goods, goodsIndex)"><span>删除</span></div>
                     </div>
                   </li>
                 </ul>
@@ -121,7 +122,8 @@
             </div>
             <div class="bottom-cart clear-fix">
               <div class="select-all" @click="selectAll">
-                <span :class="['check', {checked: allSelected}]"></span>全选
+                <span :class="['check', {checked: editingShop ? removeAllSelected : allSelected}]"></span>
+                全选
               </div>
               <div class="total-price" v-show="!editingShop">
                 合计：¥<span class="js-total-price" style="color: rgb(255, 102, 0);">{{total | priceFilter}}</span>
@@ -136,9 +138,9 @@
               </button>
               <button href="javascript:;"
                 class="j-delete-goods btn font-size-14 btn-red"
-                disabled="disabled"
-                style="display: none;"
+                :disabled="!removeLists.length"
                 v-show="editingShop"
+                @click="removeSelectedLists"
               >
                 删除
               </button>
@@ -147,12 +149,25 @@
         </div>
       </div>
     </div>
+    <div id="0SuefKPV4p" v-show="removePopup" style="height: 100%; position: fixed; top: 0px; left: 0px; right: 0px; background-color: rgba(0, 0, 0, 0.7); z-index: 1000;  opacity: 1;"></div>
+    <div id="d2tfiX27YS" v-show="removePopup" class="popout-confirm popout-box" style="overflow: hidden; position: absolute; z-index: 1000; top: 50%; left: 50%; transform: translate3d(-50%, -50%, 0px); visibility: visible; border-radius: 4px; background: white; width: 270px; padding: 15px; opacity: 1;">
+      <div class="confirm-content font-size-14" style="line-height: 20px; padding: 5px 5px 10px;">
+          {{removeMsg}}
+      </div>
+      <hr style="margin: 9px -15px 10px;">
+      <div class="btn-2-1" style="width: 47.5%;">
+          <p class="js-cancel center font-size-16" style="padding-top: 5px;" @click="removePopup = false">取消</p>
+      </div>
+      <div class="btn-2-1" style="width: 47.5%;">
+          <p class="js-ok center c-green font-size-16" style="padding-top: 5px;" @click="removeConfirm">确定</p>
+      </div>
+    </div>
   </div>
-  <div class="footer" style="min-height: 86px;">
+  <!-- <div class="footer" style="min-height: 86px;">
     <div class="copyright">
       <div class="ft-copyright " style="background-image: url(https://img.yzcdn.cn/upload_files/2016/11/15/147918630760182374.png);">
         <a class="yz-logo" href="https://www.youzan.com/?from_source=support_logo">有赞提供技术支持</a></div>
     </div>
-  </div>
+  </div> -->
 </body>
 </html>
