@@ -187,6 +187,7 @@ new Vue({
             this.removeShop()
           }
           this.removePopup = false
+          // this.$refs[`goods-${shopIndex}-${goodsIndex}`][0].style.left = '0px'
         })
       } else {
         let ids = []

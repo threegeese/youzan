@@ -50,6 +50,7 @@
                     v-for="(goods, goodsIndex) in shop.goodsList"
                     @touchstart="slideStart($event, goods)"
                     @touchend="slideEnd($event, shopIndex, goods, goodsIndex)"
+                    :key="goods.id"
                   >
                     <div>
                       <div class="check-container" @click="selectGoods(shop, goods)">
