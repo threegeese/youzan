@@ -1,5 +1,4 @@
 import Axios from 'axios'
-import url from 'js/api.js'
 
 export default function fetch (url, data) {
   return new Promise((resolve, reject) => {

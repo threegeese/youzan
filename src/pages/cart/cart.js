@@ -2,6 +2,7 @@ import Vue from 'vue'
 import Axios from 'axios'
 import Volecity from 'velocity-animate'
 
+import Cart from 'js/cartServer.js'
 import url from 'js/api.js'
 import mixin from 'js/mixin.js'
 
@@ -152,10 +153,13 @@ new Vue({
     },
 
     add (goods) {
-      Axios.post(url.addcart, {
-        id: goods.id,
-        number: 1
-      }).then(res => {
+      // Axios.post(url.addcart, {
+      //   id: goods.id,
+      //   number: 1
+      // }).then(res => {
+      //   goods.number += 1
+      // })
+      Cart.add(goods.id).then(res => {
         goods.number += 1
       })
     },
@@ -228,9 +232,9 @@ new Vue({
     slideEnd (evnet, shopIndex, goods, goodsIndex) {
       goods.endX = event.changedTouches[0].clientX
       let slideX = '0'
-      if (goods.startX - goods.endX > 100) {
+      if (goods.startX - goods.endX > 50) {
         slideX = '-60px'
-      } else if (goods.endX - goods.startX > 100) {
+      } else if (goods.endX - goods.startX > 50) {
         slideX = '0px'
       }
       Volecity(this.$refs[`goods-${shopIndex}-${goodsIndex}`], {
