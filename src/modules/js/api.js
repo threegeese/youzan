@@ -16,7 +16,12 @@ const url = {
   reducecart: '/cart/reduce',
   updatecart: '/cart/update',
   removecart: '/cart/remove',
-  removemore: '/cart/removemore'
+  removemore: '/cart/removemore',
+  addresslists: '/address/list',
+  addAddress: '/address/add',
+  removeAddress: '/address/remove',
+  updateAddress: '/address/update',
+  addressSetDefault: '/address/setDefault'
 }
 
 for (let key in url) {
