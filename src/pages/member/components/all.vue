@@ -25,18 +25,18 @@
 </template>
 
 <script>
-import Address from 'js/addressServer.js'
+// import Address from 'js/addressServer.js'
 
 export default {
-  data () {
-    return {
-      lists: null
+  computed: {
+    lists () {
+      return this.$store.state.lists
     }
   },
   created () {
-    Address.addressLists().then(res => {
-      this.lists = res.data.lists
-    })
+    if (!this.lists) {
+      this.$store.dispatch('getLists')
+    }
   },
   methods: {
     edit (list) {

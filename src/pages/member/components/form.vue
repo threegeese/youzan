@@ -53,7 +53,7 @@
 </template>
 
 <script>
-import Address from 'js/addressServer.js'
+// import Address from 'js/addressServer.js'
 
 export default {
   data () {
@@ -110,6 +110,17 @@ export default {
       if (this.type === 'edit') {
         this.districtValue = parseInt(this.instance.districtValue)
       }
+    },
+    lists: {
+      handler () {
+        this.$router.go(-1)
+      },
+      deep: true
+    }
+  },
+  computed: {
+    lists () {
+      return this.$store.state.lists
     }
   },
   methods: {
@@ -117,27 +128,28 @@ export default {
       let {name, tel, provinceValue, cityValue, districtValue, address} = this
       let data = {name, tel, provinceValue, cityValue, districtValue, address}
       if (this.type === 'add') {
-        Address.addAddress(data).then(res => {
-          this.$router.go(-1)
-        })
+        // Address.addAddress(data).then(res => {
+        //   this.$router.go(-1)
+        // })
+        this.$store.dispatch('addAction', data)
       } else if (this.type === 'edit') {
         data.id = this.id
-        Address.updateAddress(data).then(res => {
-          this.$router.go(-1)
-        })
+        // Address.updateAddress(data).then(res => {
+        //   this.$router.go(-1)
+        // })
+        this.$store.dispatch('updateAction', data)
       }
     },
     remove () {
       if (window.confirm('确认删除？')) {
-        Address.removeAddress(this.id).then(res => {
-          this.$router.go(-1)
-        })
+        this.$store.dispatch('removeAction', this.id)
       }
     },
     setDefault () {
-      Address.setDefault(this.id).then(res => {
-        this.$router.go(-1)
-      })
+      // Address.setDefault(this.id).then(res => {
+      //   this.$router.go(-1)
+      // })
+      this.$store.dispatch('setDefaultAction', this.id)
     }
   }
 }
