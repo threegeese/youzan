@@ -47,6 +47,7 @@ new Vue({
     selectedLists () {
       let lists = []
       let total = 0
+      let _this = this
       if (this.cartLists && this.cartLists.length) {
         this.cartLists.forEach(shop => {
           shop.goodsList.forEach(goods => {
@@ -57,7 +58,7 @@ new Vue({
           })
         })
       }
-      this.total = total
+      _this.total = total
       return lists
     },
     removeLists () {
